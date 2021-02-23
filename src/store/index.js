@@ -61,15 +61,27 @@ export default createStore({
       return state.accounts;
     },
 
-    getAccountbyId: (state) => (_id) =>{
-      return state.accounts.find(ac=> ac.id == _id).title;
+    getACtitlebyId: (state) => (_id) =>{
+      return state.accounts.find( ac=> ac.id == _id).title;
+    },
+
+    getIdbyACtitle: (state)=> (_title)=>{
+      let _ent =  state.accounts.find( ac => ac.title == _title );
+      let _id = _ent ? _ent.id : undefined;
+      return _id;
     },
     
     getAllEntries: state =>{
       return state.entries;
-    }
+    },
+    getEntrybyId: (state) => (_id) => {
+      return state.entries.find( ent => ent.id == _id );
+    } 
   },
   mutations: {
+    insertEntry(state, ent){
+      state.entries.push(ent);
+    }
   },
   actions: {
   },

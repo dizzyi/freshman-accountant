@@ -1,13 +1,7 @@
 <template>
   <div>This is the general Journal Page</div>
   <div v-for="entry in getAllEntries" :key="entry.id">
-      <br>
-      {{entry.date}} <br>
-      CR {{ getAccountbyId( entry.creditAccountId)}} <br>
-      DR {{ getAccountbyId( entry.debitAccountId )}} <br>
-      $ {{entry.amount}} <br>
-      {{entry.description}}
-      <br><br>
+      <Entry :entry='entry'/>
   </div>
   <insertEntry></insertEntry>
 </template>
@@ -15,16 +9,18 @@
 <script>
 import { mapGetters } from 'vuex';
 import insertEntry from '../components/insertEntry.vue';
+import Entry from '../components/Entry.vue';
 
 export default {
     components:{
-        insertEntry
+        insertEntry,
+        Entry,
     },
     computed:{
         ...mapGetters([
             'getAllEntries',
             'getAllAccounts',
-            'getAccountbyId'
+            'getACtitlebyId'
         ])
     }
 }
