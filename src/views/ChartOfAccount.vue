@@ -1,18 +1,18 @@
 <template>
-    <div>
-    This is the chart of account
-    <div v-for="ac in getAllAccounts" :key="ac.id">
-        {{ ac.title }} : 
-        <span v-if="ac.type=='asset'">DR {{-ac.balance}}</span>
-        <span v-else>CR {{ac.balance}}</span>
-    </div>
+    <div id='chartOfAccount'>
+        <div v-for="ac in getAllAccounts" :key="ac.id">
+            <TAccount :account='ac' />
+        </div>
     </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-
+import TAccount from "../components/TAccount.vue";
 export default {
+    components:{
+        TAccount
+    },
     computed:{
         ...mapGetters([
             'getAllAccounts',
@@ -22,5 +22,17 @@ export default {
 </script>
 
 <style>
+#chartOfAccount{
+    width: 90%;
+    margin:auto;
+    display: flex;
+    justify-content: start;
+    align-content: space-around;
+    flex-wrap: wrap;
+    gap: 1%
+}
+#chartOfAccount > div{
+    flex-basis: 19.2%
+}
 
 </style>
