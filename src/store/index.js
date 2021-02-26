@@ -1,5 +1,8 @@
 import { createStore } from 'vuex'
 
+
+//// All should store in cent
+//// $15 -> 1500
 export default createStore({
   state: {
     accounts:[

@@ -5,7 +5,9 @@
     <router-link to="/generalJournal">General Journal</router-link>
     <router-link to="/chartofaccount">Chart of Account</router-link>
   </div>
-  <router-view/>
+  <div id='view'>
+    <router-view/>
+  </div>
 </template>
 
 <style>
@@ -21,12 +23,11 @@
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
-  padding: 0;
-  margin:0;
-  box-sizing: border-box;
   text-align: center;
   color: #e9c5c5;
   background: #25252b;
+  display:flex;
+  flex-direction: column;
 }
 
 #nav {
@@ -52,5 +53,11 @@
 
 #nav a.router-link-exact-active {
   background-color: #686891;
+}
+
+#view{
+  overflow-y: scroll;
+  padding: 1rem;
+  height: 100%;
 }
 </style>
