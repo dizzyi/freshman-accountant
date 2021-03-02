@@ -1,37 +1,25 @@
 <template>
-  <div class="entry">
-    <div class="entrydate">
-        {{ entry.date }}
+    <div class="entry">
+        <div class="entrydate">
+            {{ entry.date }}
+        </div>
+        <div class='tran' v-for='tran in entry.transections' :key="tran.accountId" v-bind:class="{debit: tran.amount>0}">
+        
+            <div class='tranTitle'>
+                {{ getACtitlebyId( tran.accountId ) }}
+            </div>
+            <div class="tranAmount" >
+                {{ tran.amount > 0 ? tran.amount : -tran.amount }}
+            </div>
+        </div>
+
+        <div class="entryID">
+            {{ entry.id }}
+        </div>
+        <div class='entryDesc'>
+            {{ entry.description }}
+        </div>  
     </div>
-    <div class='entryCRtitle'>
-        {{ getACtitlebyId( entry.creditAccountId) }}
-    </div>
-    <div class="entryCRamount">
-        {{ entry.amount }}
-    </div>
-    <div class="entryID">
-        {{ entry.id }}
-    </div>
-    <div class='entryDRtitle'>
-        {{ getACtitlebyId( entry.debitAccountId ) }}
-    </div>
-    <div class='entryDRamount'>
-        {{ entry.amount }}
-    </div>
-    <div class='entryDesc'>
-        {{ entry.description }}
-    </div>  
-    <!--  
-    <br>
-    {{entry.date}} <br>
-    CR {{ getACtitlebyId( entry.creditAccountId)}} <br>
-    DR {{ getACtitlebyId( entry.debitAccountId )}} <br>
-    $ {{entry.amount}} <br>
-    {{entry.description}}<br>
-    {{entry.id}}
-    <br><br>
-    -->
-  </div>
 </template>
 
 <script>
@@ -58,31 +46,51 @@ export default {
     background: #474444;
 
     display: grid;
-    grid-template-columns: max(10%,5rem) max(5%,1rem) auto max(5%,1rem) max(10%,5rem) max(5%,4rem);
+    grid-template-columns: max(10%,5rem) auto max(5%,4rem);
     justify-items: start;
     gap: 5px;
+    grid-auto-flow: row;
 }
 .entry > div{
     height: 100%;
     width: 100%;
     text-align: start;
-
     border-bottom: 1px solid black;
 }
 
-.entryCRtitle, .entryCRamount{
-    grid-column:auto/span 2
-}
-
-.entryDRtitle{
-    grid-column: 3/auto;
-}
-.entryDRamount{
-    grid-column: 5/auto;
-}
-.entryDesc{
-    grid-row: 3;
+.tranTitle{
     grid-column: 2/span 2;
 }
+.tranAmount{
+    grid-column: 4/span 2;
+}
+.entryID{
+    grid-column: 3/3;
+    grid-row: 1/1;
+}
+.tran{
+    grid-column: 2/2;
+    display:grid;
+    grid-template-columns: 2rem auto 2rem 5rem;
+}
+.entryDesc{
+    grid-column: 2/2;
+}
+
+.tranTitle{
+    grid-column: span 2;
+}
+.tranAmount{
+    grid-column: span 2;
+}
+
+.debit .tranTitle{
+    grid-column: 2/2;
+}
+.debit .tranAmount{
+    grid-column: 4/4;
+}
+
+
 
 </style>

@@ -28,17 +28,30 @@ export default createStore({
     entries:[
       {
         id: 45463,
-        creditAccountId: 827,
-        debitAccountId: 1216,
-        amount: 100,
+        transections: [
+          {
+            accountId: 827,amount: 100,
+          },
+          {
+            accountId: 1216,amount: -100,
+          }
+        ],
         date: '2021-02-17',
         description:'initial investment',
       },
       {
         id: 468113,
-        creditAccountId: 9999,
-        debitAccountId: 1216,
-        amount: 1000,
+        transections:[
+          {
+            accountId: 1216, amount: -1000
+          },
+          {
+            accountId: 9999, amount: 1000
+          },
+          {
+            accountId: 827, amount: 250
+          }
+        ],
         date: '2021-02-18',
         description:'Loan from bank',
       }
@@ -51,21 +64,19 @@ export default createStore({
         ac.balance = 0;
       })
       
-      state.entries.forEach((ele)=>{
-        state.accounts.forEach(ac =>{
-          if( ac.id == ele.creditAccountId ){
-            ac.balance += ele.amount;
-          }
-          if( ac.id == ele.debitAccountId ){
-            ac.balance -= ele.amount;
-          }
-        });
+      state.entries.forEach((ent)=>{
+        ent.transections.forEach(tran=>{
+          state.accounts.find(ac=>ac.id==tran.accountId).balance += tran.amount;
+        })
+
       })
       return state.accounts;
     },
 
     getACtitlebyId: (state) => (_id) =>{
-      return state.accounts.find( ac=> ac.id == _id).title;
+      let _ac = state.accounts.find( ac=> ac.id == _id);
+      let _title = _ac ? _ac.title : undefined;
+      return _title;
     },
 
     getIdbyACtitle: (state)=> (_title)=>{
@@ -77,6 +88,7 @@ export default createStore({
     getAllEntries: state =>{
       return state.entries;
     },
+
     getEntrybyId: (state) => (_id) => {
       return state.entries.find( ent => ent.id == _id );
     } 
