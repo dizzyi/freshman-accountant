@@ -1,5 +1,8 @@
 # freshman-accountant
 
+## Link
+https://dizzyi.github.io/freshman-accountant/
+
 ## Project setup
 ```
 yarn install
