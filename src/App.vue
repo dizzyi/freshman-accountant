@@ -5,8 +5,13 @@
     <router-link to="/generalJournal">General Journal</router-link>
     <router-link to="/chartofaccount">Chart of Account</router-link>
   </div>
-  <div id='view'>
-    <router-view/>
+  <div id="main">
+    <div id='insert'>
+      <insert-panel/>
+    </div>
+    <div id='view'>
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -55,9 +60,32 @@
   background-color: #686891;
 }
 
+#main{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#insert{
+  margin: 2rem;
+  margin-left: 0;
+  flex-basis: 1;
+  flex-grow: 0;
+  width: max(20vw,30rem);
+  background: #9fbad6;
+  color: black;
+  border-radius: 0 20px 0 0;
+  height: 100%;
+}
+
 #view{
   overflow-y: scroll;
+  margin-top: 2rem;
   padding: 1rem;
   height: 100%;
+  flex-basis: 3;
+  flex-grow: 1;
 }
 </style>

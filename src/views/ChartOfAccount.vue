@@ -23,16 +23,15 @@ export default {
 
 <style>
 #chartOfAccount{
-    width: 90%;
+    width: 100%;
     margin:auto;
     display: flex;
     justify-content: start;
-    align-content: space-around;
     flex-wrap: wrap;
-    gap: 1%
+    gap: 1rem;
 }
-#chartOfAccount > div{
-    flex-basis: 19.2%
+#chartOfAccount>div{
+    width: 250px;
 }
 
 </style>
