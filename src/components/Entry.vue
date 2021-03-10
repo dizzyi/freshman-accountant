@@ -71,7 +71,7 @@ export default {
 .tran{
     grid-column: 2/2;
     display:grid;
-    grid-template-columns: 2rem auto 2rem 5rem;
+    grid-template-columns: 4rem auto 4rem 5rem;
 }
 .entryDesc{
     grid-column: 2/2;

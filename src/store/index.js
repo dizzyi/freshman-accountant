@@ -81,7 +81,7 @@ export default createStore({
 
     getIdbyACtitle: (state)=> (_title)=>{
       let _ent =  state.accounts.find( ac => ac.title == _title );
-      let _id = _ent ? _ent.id : undefined;
+      let _id = _ent ? _ent.id : -1;
       return _id;
     },
     
