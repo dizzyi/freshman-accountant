@@ -8,20 +8,32 @@
             <div id="entries">
                 <div>Account</div>
                 <div>Amount</div>
-                <div v-for="tran in trans" :key='tran.account'>
+                <div v-for="(tran,index) in trans" :key='index'>
                     
-                    <input type="text" name="" id="" v-model="tran.account">
+                    <input type="text" name="" id="" v-model="tran.title">
                     <input type="number" name="" id="" v-model="tran.amount">
-
+                    <button v-on:click.prevent="trans.splice(index,1)">X</button>
+                    <!--<span>{{ this.getIdbyACtitle(tran.title) }}</span> -->
                 </div>
+                <button v-on:click.prevent="trans.push({title:'',amount:0})" >More transections</button>
             </div>
             <br>
             <legend>Description</legend>
             <input type="text" name="description" id='description' v-model="description">
             <br>
-            <div v-for="newac in newAccount" :key="newac.account">
-                {{ newac.account }}
+            <br>
+            <div v-for="(ac,index) in newAC" :key="index" >
+                Create new account: <br>
+                title: {{ac.title}} <br>
+                type: <input type="text" v-model="ac.type"><br>
+                class: <select name="" id="" v-model="ac.class">
+                    <option value="">asset</option>
+                    <option value="">liability</option>
+                    <option value="">equity</option>
+                </select>
+                
             </div>
+            <br>
             <br>
             <button v-on:click.prevent="inserttoStore" :disabled="!valid">Insert Entry</button>
         </form>
@@ -37,10 +49,10 @@ export default {
             date: '2021-02-19',
             trans:[
                 {
-                    account: 'Cash', amount: -1000
+                    title: 'Cash in Fiat', amount: -1000
                 },
                 {
-                    account : 'Note payable', amount: 1000
+                    title : 'Wolfgang Bank Loan', amount: 1000
                 }
             ],
             description: 'normal transaction',
@@ -54,13 +66,16 @@ export default {
         ]),
         _idUnique : function(){return this.getEntrybyId( this.id )},
 
-        newAccount: function(){
-            return this.trans.filter((ele)=>{
-                this.getIdbyACtitle(ele.account) === -1;
+        newAC: function(){
+            return this.trans.filter((t)=>{
+                return this.getIdbyACtitle(t.title) == -1
             })
         },
 
         valid: function(){
+            for(let i = 0 ; i <  this.trans.length ; i++){
+                if (this.getIdbyACtitle(this.trans[i].title) == -1) return false;
+            }
             return true;    
         }
     },
@@ -77,6 +92,7 @@ export default {
                 console.log(this.id);
                 console.log( this._idUnique );
             } while ( this._idUnique );
+            console.log(this);
 
             // insert the entry onto the general journal
             this.insertEntry({
@@ -84,7 +100,7 @@ export default {
                 transections: this.trans.map((ele)=>{
                     return {
                         accountId:this.getIdbyACtitle(ele.account),
-                        amount: ele.amount
+                        amount: ele.amount*100,
                     }
                 }),
                 description: this.description,

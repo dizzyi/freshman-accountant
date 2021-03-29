@@ -1,7 +1,10 @@
 <template>
     <div id='chartOfAccount'>
-        <div v-for="ac in getAllAccounts" :key="ac.id">
-            <TAccount :account='ac' />
+        <div class="desc">Accounts</div>
+        <div id="accounts">
+            <div v-for="ac in getAllAccounts" :key="ac.id">
+                <TAccount :account='ac' />
+            </div>
         </div>
     </div>
 </template>
@@ -24,14 +27,14 @@ export default {
 <style>
 #chartOfAccount{
     width: 100%;
-    margin:auto;
-    display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 1rem;
+    overflow-y: scroll;
 }
-#chartOfAccount>div{
-    width: 250px;
+#chartOfAccount #accounts{
+    width: 90%;
+    display: grid;
+    margin: 1rem auto;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
 }
 
 </style>

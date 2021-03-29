@@ -1,7 +1,9 @@
 <template>
-  <div id="generalEntry">This is the general Journal Page</div>
-  <div v-for="entry in getAllEntries" :key="entry.id">
-      <Entry :entry='entry'/>
+  <div id="generaljournal">
+    <div class="desc">Entries</div>
+    <div v-for="entry in getAllEntries" :key="entry.id">
+        <Entry :entry='entry'/>
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,10 @@ export default {
 </script>
 
 <style>
-#generalEntry{
+#generaljournal{
     width: 100%;
+    overflow-y: scroll;
 }
+
+
 </style>

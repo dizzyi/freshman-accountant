@@ -8,20 +8,26 @@ export default createStore({
     accounts:[
       {
         id: 827,
-        title:"Owern's Equity",
-        type: 'equity',
+        chartNum: 100,
+        type:"Owern's Equity",
+        class: 'equity',
+        title: "Alice's Equity",
         balance: 0
       },
       {
         id: 1216,
-        title:"Cash",
-        type: 'asset',
+        type:"Cash",
+        chartNum: 200,
+        class: 'asset',
+        title: "Cash in Fiat",
         balance: 0
       },
       {
         id: 9999,
-        title:"Note Payable",
-        type: 'liability',
+        chartNum: 301,
+        type:"Notes Payable",
+        class: 'liability',
+        title: "Wolfgang Bank Loan",
         balance: 0
       }
     ],
@@ -30,10 +36,10 @@ export default createStore({
         id: 45463,
         transections: [
           {
-            accountId: 827,amount: 100,
+            accountId: 827,amount: 10000,
           },
           {
-            accountId: 1216,amount: -100,
+            accountId: 1216,amount: -10000,
           }
         ],
         date: '2021-02-17',
@@ -43,13 +49,13 @@ export default createStore({
         id: 468113,
         transections:[
           {
-            accountId: 1216, amount: -1000
+            accountId: 1216, amount: -150000
           },
           {
-            accountId: 9999, amount: 1000
+            accountId: 9999, amount: 100000
           },
           {
-            accountId: 827, amount: 250
+            accountId: 827, amount: 50000
           }
         ],
         date: '2021-02-18',

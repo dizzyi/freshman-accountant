@@ -1,0 +1,15 @@
+./home
+
+./about
+
+./freshmanaccountant
+    /generaljournal
+    /chartofaccount
+    /dashboard
+    /account
+        /{{acc_id}}
+    /entry
+        /{{entry_id}}
+    /smartentry
+        /{{smartentry_id}}
+    

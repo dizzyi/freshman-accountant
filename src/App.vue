@@ -1,21 +1,19 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link>
-    <router-link to="/about">About</router-link>
-    <router-link to="/generalJournal">General Journal</router-link>
-    <router-link to="/chartofaccount">Chart of Account</router-link>
-  </div>
-  <div id="main">
-    <div id='insert'>
-      <insert-panel/>
-    </div>
-    <div id='view'>
-      <router-view/>
-    </div>
-  </div>
+  <header>
+    <div id="logo">Freshman Accountant</div>
+    <nav id="sitenav">
+      <router-link to="/">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/app/dashboard" v-bind:class="{activelink: this.$route.path.includes('app') }" >App</router-link>
+    </nav>
+  </header>
+  <router-view></router-view>
 </template>
 
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,900&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -23,69 +21,76 @@
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   width: 100vw;
   height: 100vh;
+  overflow:hidden;
   text-align: center;
-  color: #e9c5c5;
-  background: #25252b;
+  color: #dbdbdb;
+  background: #1b1d23;
   display:flex;
   flex-direction: column;
 }
 
-#nav {
+header{
+  display: flex;
+  height: 8vh;
+  min-height: 80px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#logo{
+  background: -webkit-linear-gradient(265deg,#50f136, #09c7bd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1.5rem;
+  font-style: italic;
+  padding: 2rem;
+}
+
+#sitenav {
   display: flex;
   align-content: center;
   justify-content: center;
   gap: 1rem;
-  min-height: 50px;
-  height: 5vh;
+  height: 100%;
+  padding-right: 2rem;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #9fbad6;
+#sitenav a {
+  font-style: italic;
+  background: #dbdbdb;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   padding: 1rem 1rem;
   text-decoration: none;
-  background-color: #363647;
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center;
-}
-
-#nav a.router-link-exact-active {
-  background-color: #686891;
-}
-
-#main{
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   height: 100%;
+
+  transition:cubic-bezier(0.075, 0.82, 0.165, 1) 0.1s;
 }
 
-#insert{
-  margin: 2rem;
-  margin-left: 0;
-  flex-basis: 1;
-  flex-grow: 0;
-  width: max(20vw,30rem);
-  background: #9fbad6;
-  color: black;
-  border-radius: 0 20px 0 0;
-  height: 100%;
+#sitenav a.activelink, #sitenav a.router-link-active {
+  background: -webkit-linear-gradient(230deg,#50f136, #09c7bd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  border-bottom: solid 5px;
+  border-image: linear-gradient(to right, #50f136, #09c7bd);
+  border-image-slice: 1;
 }
 
-#view{
-  overflow-y: scroll;
-  margin-top: 2rem;
-  padding: 1rem;
-  height: 100%;
-  flex-basis: 3;
-  flex-grow: 1;
+.desc{
+  text-align: start;
+  color: #8a8a8a;
+  padding-left: 2rem;
+  font-size: 1.5rem;
+  font-style: italic;
 }
+
 </style>

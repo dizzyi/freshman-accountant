@@ -1,5 +1,19 @@
 <template>
     <div class="entry">
+        <div class="entrylegend">
+            Date
+        </div>
+        <div class="entrylegend">
+            Account
+        </div>
+        <div class="entrylegend">
+            Credit
+        </div>
+        <div class="entrylegend">
+            Debit
+        </div>
+
+        <div class="breakline"></div>
         <div class="entrydate">
             {{ entry.date }}
         </div>
@@ -9,15 +23,20 @@
                 {{ getACtitlebyId( tran.accountId ) }}
             </div>
             <div class="tranAmount" >
-                {{ tran.amount > 0 ? tran.amount : -tran.amount }}
+                {{ tran.amount > 0 ? (tran.amount/100).toFixed(2) : (-tran.amount/100).toFixed(2) }}
             </div>
         </div>
-
-        <div class="entryID">
-            {{ entry.id }}
+        <div class="breakline"></div>
+        <div class="entrylegend">
+            Description
         </div>
+        
         <div class='entryDesc'>
             {{ entry.description }}
+        </div>
+        
+        <div class="entryID entrylegend">
+            Entry ID:{{ entry.id }}
         </div>  
     </div>
 </template>
@@ -32,30 +51,50 @@ export default {
     props:['entry'],
     computed:{
         ...mapGetters(['getACtitlebyId']),
-    }
+    },
 }
 </script>
 
-<style>
+<style  scoped>
+
 .entry{
     width: 90%;
     margin: 1rem auto;
-    padding: 0.5rem;
-
+    padding: 1rem;
+    border-radius: 2rem;
     color: #e9dada;
-    background: #474444;
-
+    background: #33353B;
+    font-weight: bold;
     display: grid;
-    grid-template-columns: max(10%,5rem) auto max(5%,4rem);
+    grid-template-columns: max(10%,6rem) auto max(5%,4rem) max(5%,4rem);
     justify-items: start;
+    align-items: center;
     gap: 5px;
     grid-auto-flow: row;
+
+    filter: drop-shadow(5px 5px 5px black);
 }
+
+.entrylegend{
+    font-size: 0.8rem;
+    color:#8a8a8a;
+
+}
+
 .entry > div{
     height: 100%;
     width: 100%;
     text-align: start;
-    border-bottom: 1px solid black;
+}
+
+.entry > .entryID{
+    grid-column: 1/1;
+}
+
+.entry > .breakline{
+    grid-column: 1/5;
+    height: 2px;
+    background: white;
 }
 
 .tranTitle{
@@ -63,13 +102,10 @@ export default {
 }
 .tranAmount{
     grid-column: 4/span 2;
-}
-.entryID{
-    grid-column: 3/3;
-    grid-row: 1/1;
+    text-align: end;
 }
 .tran{
-    grid-column: 2/2;
+    grid-column: 2/5;
     display:grid;
     grid-template-columns: 4rem auto 4rem 5rem;
 }
@@ -81,7 +117,7 @@ export default {
     grid-column: span 2;
 }
 .tranAmount{
-    grid-column: span 2;
+    grid-column: 3/3;
 }
 
 .debit .tranTitle{
@@ -90,6 +126,7 @@ export default {
 .debit .tranAmount{
     grid-column: 4/4;
 }
+
 
 
 

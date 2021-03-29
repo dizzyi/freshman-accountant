@@ -16,15 +16,27 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/generalJournal',
-    name : 'GeneralJournal',
-    component: () =>  import('../views/GeneralJournal.vue')
+    path: '/app',
+    name:'app',
+    component: () => import('../views/App.vue'),
+    children:[
+      {
+        path: 'dashboard',
+        component: () => import('../components/dashboard.vue'),
+      },
+      {
+        path: 'generaljournal',
+        //name : 'GeneralJournal',
+        component: () =>  import('../views/GeneralJournal.vue') 
+      },
+      {
+
+        path: 'chartofaccount',
+        //name: "ChartOfAccount",
+        component:  () => import("../views/ChartOfAccount.vue")
+      }
+    ]
   },
-  {
-    path: '/chartofaccount',
-    name: "ChartOfAccount",
-    component: () => import("../views/ChartOfAccount.vue")
-  }
 ]
 
 const router = createRouter({

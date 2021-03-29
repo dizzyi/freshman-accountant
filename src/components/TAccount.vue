@@ -1,21 +1,27 @@
 <template>
   <div class='taccount'>
-      <router-link to="/chartofaccount" class='taccountLink'>
+      <router-link to="/app/chartofaccount" class='taccountLink'>
+        <div class="taccountchartnum">
+            {{ account.chartNum}}
+        </div>
         <div class='taccounttitle'>
             {{ account.title }}
         </div>
 
-        <div v-if="account.type == 'asset'" class='CRDR'>
+        <div v-if="account.class == 'asset'" class='CRDR'>
             <div> 
-                {{ -account.balance }}
+                {{ (-account.balance/100).toFixed(2) }}
             </div>
             <div></div>
         </div>
         <div v-else class='CRDR'>
             <div></div>
             <div>
-                {{ account.balance }}
+                {{ (account.balance/100).toFixed(2) }}
             </div>
+        </div>
+        <div class="desc">
+            Account ID: {{account.id}}
         </div>
 
         
@@ -31,9 +37,10 @@ export default {
 
 <style>
 .taccount{
-    background-color: #474444;
-
+    background-color: #33353B;
+    font-weight: bold;
     transition: ease-in-out 0.25s;
+    border-radius: 2rem;
 }
 .taccountLink{
     display:block;
@@ -45,7 +52,7 @@ export default {
 }
 .taccounttitle{
     width: 100%;
-    border-bottom: solid 0.1rem black;
+    border-bottom: solid 2px white;
     padding: 0.5rem
 }
 .CRDR{
@@ -56,10 +63,16 @@ export default {
     padding: 0.5rem
 }
 .CRDR div:first-child{
-    border-right: solid 0.1rem black;
+    border-right: solid 2px white;
 }
 .taccount:hover{
-    scale: 1.1;
-    
+    scale: 1.1;    
+}
+.taccount .desc{
+    text-align: start;
+    font-size: 0.8rem;
+    padding: 0;
+    margin: 0;
+    padding-left: 1rem;
 }
 </style>
